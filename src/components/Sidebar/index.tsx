@@ -13,8 +13,7 @@ const Sidebar = ({setFilter }: any  ): JSX.Element => {
                     <div className="card-header text-center">
                       Filters
                     </div>
-                    <div className="card-body bg-dark text-white">
-                    <div>
+                    <div className="card-body bg-dark text-white card-responsive">
                       <div className="custom-control custom-radio c-pointer">
                         <input type="radio" 
                           className="custom-control-input" 
@@ -43,7 +42,6 @@ const Sidebar = ({setFilter }: any  ): JSX.Element => {
                         onChange={ _handleChange }/>
                         <label className="custom-control-label c-pointer" htmlFor="dimensions">Dimensions</label>
                       </div>
-                    </div>
                   </div>
                 </div>
               </div>

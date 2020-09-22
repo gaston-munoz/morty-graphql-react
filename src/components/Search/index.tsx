@@ -15,7 +15,7 @@ const Search = ({ setTextSearch, textSearch }: any) => {
           <div className="input-group mb-3 m-1">
             <input type="text" 
               className="form-control b-radius" 
-              placeholder="&#x1f50d; Entry the search" 
+              placeholder="&#x1f50d; Search" 
               aria-label="Recipient's username" 
               aria-describedby="button-addon2" 
               onChange={(e: ChangeEvent<HTMLInputElement> ) => { _handleChange(e.target.value)}}

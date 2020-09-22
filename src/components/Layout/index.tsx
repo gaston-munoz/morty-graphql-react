@@ -4,14 +4,56 @@ import Sidebar from '../Sidebar';
 import Footer from '../Footer';
 import Search from '../Search';
 import List from '../List';
+import ApolloClient, { ApolloCurrentQueryResult, ApolloQueryResult, gql } from 'apollo-boost';  
+import { DocumentNode } from 'graphql';
+
+const client = new ApolloClient({
+    uri: 'https://rickandmortyapi.com/graphql'
+  })
 
 const Layout = ({ children }: Props<JSX.Element> ): JSX.Element => {
-
     const [ filter, setFilter ] = useState<string>('characters');
     const [ textSearch, setTextSearch ] = useState<string>('');
+    const [ results, setResults ] = useState([])
+
+    let queryCharacters: DocumentNode = gql`
+     query characters{
+        characters {
+            results {
+              name
+              image
+            }
+        }
+    }
+`
+
+
+    useEffect(()=> {
+        getCharacters(filter, textSearch);
+        
+    }, [])
+
+
+    interface CharacterData {
+        characters : Result
+    }
+
+    interface Result {
+        results: Character[]
+    }
+    interface Character {
+        name: string,
+
+
+    }
+
 
     const getCharacters = (filter: string, textSearch: string): void => {
-        console.log(filter);
+        client.query( {query: queryCharacters})
+         .then(( {data}: ApolloQueryResult<any> ) => {
+             console.log('RES', data);
+             setResults(data.characters.results)
+         })
     }
 
     const getEpisodes = (filter: string, textSearch: string): void => {
@@ -37,6 +79,7 @@ const Layout = ({ children }: Props<JSX.Element> ): JSX.Element => {
                 break;
             }
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ textSearch ])
 
     return (
@@ -48,7 +91,7 @@ const Layout = ({ children }: Props<JSX.Element> ): JSX.Element => {
             </div>  
             <div className="col-md-9 padding-res">
               <Search setTextSearch={setTextSearch} textSearch={textSearch} />
-              <List />  {/* Sera la lista de de */}
+              <List /> 
             </div>
           </div>
         <Footer />
