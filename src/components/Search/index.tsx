@@ -1,18 +1,23 @@
-import React, { ChangeEvent, Props } from 'react';
+import React, { ChangeEvent } from 'react';
 
-const Search = ({ setTextSearch, textSearch }: any) => {
+interface PropT {
+  setTextSearch: Function,
+  textSearch: string,
+  setPageState: Function
+}
+
+const Search = ({ setTextSearch, textSearch, setPageState }: PropT) => {
     const _handleChange = (text: string) => {
       setTextSearch(text);
-    }
-/*
-    const _handleClean = (e: ) => {
-      e.preventDefault();
-      setTextSearch('');
+      setPageState({
+        prev: 0,
+        next: 1
+      });
+
     }
 
-*/
     return (
-          <div className="input-group mb-3 m-1">
+          <div className="input-group mb-3 col-md-12 col-offset-1 mx-auto m-1">
             <input type="text" 
               className="form-control b-radius" 
               placeholder="&#x1f50d; Search" 

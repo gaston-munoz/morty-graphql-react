@@ -1,10 +1,18 @@
-import React, { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import React, { ChangeEvent } from 'react';
 
+interface PropsT {
+  setFilter: Function,
+  setPageState: Function
+}
 
-const Sidebar = ({setFilter }: any  ): JSX.Element => {
+const Sidebar = ({setFilter, setPageState }:PropsT  ): JSX.Element => {
 
     const _handleChange = (e: ChangeEvent<HTMLInputElement>):void=> {
         setFilter(e.target.value);
+        setPageState({
+          prev: 0,
+          next: 1
+        });
     }
 
     return (
@@ -36,11 +44,11 @@ const Sidebar = ({setFilter }: any  ): JSX.Element => {
                       <div className="custom-control custom-radio ">
                         <input type="radio" 
                         className="custom-control-input c-pointer" 
-                        id="dimensions" 
+                        id="locations" 
                         name="filter" 
-                        value="dimensions" 
+                        value="locations" 
                         onChange={ _handleChange }/>
-                        <label className="custom-control-label c-pointer" htmlFor="dimensions">Dimensions</label>
+                        <label className="custom-control-label c-pointer" htmlFor="locations">Locations</label>
                       </div>
                   </div>
                 </div>

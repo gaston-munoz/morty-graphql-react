@@ -35,6 +35,10 @@ div.custom-control.custom-radio {
   padding: 1px 30px !important;
 }
 
+.b-radius-3 {
+  border-radius: 3px
+}
+
 .btn-primary {
   vertical-align: top !important;
   padding: 2px 20px;
@@ -126,3 +130,36 @@ h4 {
   margin-right: 0 !important;
 }
 
+.pagination {
+  justify-content: space-between;
+}
+
+.pagination .page-item {
+  padding: 5px;
+  background-color: inherit !important;
+  color: inherit;
+}
+
+.pagination .page-link {
+  font-weight: 600 !important;
+  border-radius: 20%;
+  font-size: 1.2rem;
+  background-color: inherit !important ;
+  color: white !important;
+  cursor: pointer;
+
+}
+
+.pagination .page-item.disabled {
+  color: black !important;
+} 
+
+li.page-item.disabled span {
+  color: rgb(112, 112, 112) !important;
+  cursor: initial !important;
+
+}
+
+.min-heigth-90 {
+  min-height: 70vh;
+}
