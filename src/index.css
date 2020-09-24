@@ -163,3 +163,28 @@ li.page-item.disabled span {
 .min-heigth-90 {
   min-height: 70vh;
 }
+
+.text-normal {
+  font-weight: normal !important;
+}
+
+.modal-res {
+  display: block;
+  text-align: center;
+  min-height: 300px !important;
+}
+
+.hmodal-location {
+  display: block !important;
+  text-align: center !important;
+  min-height: 0px !important;
+}
+.text-red {
+  color: rgba(165, 16, 16, 0.863) !important;
+}
+
+.n-trans {
+  text-transform: none !important;
+
+}
+

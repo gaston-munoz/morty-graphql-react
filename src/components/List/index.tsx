@@ -6,64 +6,63 @@ import Pagination from '../Pagination'
 // import { results } from '../../db/index'
 import ApolloClient, { gql } from 'apollo-boost';
 
+const client = new ApolloClient({
+  uri: 'https://rickandmortyapi.com/graphql'
+})
+
 interface Data {
+    id: number,
     name: string,
     image?: string,
     type?: string
 
 }
 
-const client = new ApolloClient({
-  uri: 'https://rickandmortyapi.com/graphql'
-})
-
 const queryCharacters = gql`
-query ($text: FilterCharacter, $page: Int) {
-    characters(filter: $text, page: $page) {
-        info {
-          next
-          prev
-        }
-        results{
-          id
-          name
-          image
-        }
+  query ($text: FilterCharacter, $page: Int) {
+      characters(filter: $text, page: $page) {
+          info {
+            next
+            prev
+          }
+          results{
+            id
+            name
+            image
+          }
     }
-}
-`
+}`
 
 const queryEpisodes = gql`
-query ($text: FilterEpisode, $page: Int) {
-episodes(filter: $text, page: $page) {
-  info {
-    next
-    prev
+  query ($text: FilterEpisode, $page: Int) {
+    episodes(filter: $text, page: $page) {
+      info {
+        next
+        prev
+      }
+      results{
+        id
+        name
+        episode 
+    }
   }
-  results{
-    id
-    name
-    episode 
-  }
-}
 }
 `
 
 const queryLocations = gql`
-query ($text: FilterLocation, $page: Int) {
-locations(filter: $text, page: $page) {
-    info {
-      next
-      prev
+  query ($text: FilterLocation, $page: Int) {
+    locations(filter: $text, page: $page) {
+      info {
+        next
+        prev
+      }
+      results{
+        id
+        name
+        dimension 
     }
-    results{
-      id
-      name
-      dimension 
-    }
-}
-} 
-`
+ }
+}`
 
 interface TextProp {
   filter: string,
@@ -78,14 +77,12 @@ interface StateP {
 }
 
 const List = ( { filter, textSearch, pageState, setPageState }: TextProp ): JSX.Element => {
-  console.log('FIL', filter, textSearch)
   const [ results, setResults ] = useState([])
   const [ loading, setLoading ] = useState(false)
   const [ error, setError ] = useState(false)
 
 
 const fetchData = (filter: string, textSearch: string, page: number ) => {
-  console.log('AQUI ESTOY', filter, textSearch, page )
   setLoading(true)
   setError(false);
   let query = filter === 'characters' ? queryCharacters : filter === 'locations' ?  queryLocations : queryEpisodes;
@@ -99,7 +96,6 @@ const fetchData = (filter: string, textSearch: string, page: number ) => {
       }
    })
   .then(( { data, loading } ) => {
-      console.log('RES', data, loading)
       setLoading(loading)
       if(filter === 'characters') {
         setResults(data.characters.results)
@@ -125,104 +121,16 @@ const fetchData = (filter: string, textSearch: string, page: number ) => {
       return;
   })
   .catch(err => {
-          console.log(err.message);
           if(err.message.toString().split(':')[1] === " 404"){
              setResults([]);
              setLoading(false);
              setError(false);
-             console.log('rer', err.message.toString().split(':'))
              return;
           }  
           setError(true);
           return;
   })
 }
-/*
-const getEpisodes = (filter: string, textSearch: string) => {
-  setLoading(true)
-  client.query({ 
-      query: queryEpisodes,
-      variables: {
-          text: {
-             name: textSearch
-          }
-      }
-   })
-  .then(( { data, loading } ) => {
-      console.log('RES', data, loading)
-      setLoading(loading)
-      setResults(data.episodes.results)
-  })
-  .catch(err => {
-          console.log(err);
-          if(err.message.toString().split(':')[1] === " 404"){
-            setResults([]);
-            setLoading(false);
-            setError(false);
-            console.log('rer', err.message.toString().split(':'))
-            return;
-         }  
-          setResults([]);
-          return;
-  })
-}
-
-const getLocations = (filter: string, textSearch: string) => {
-  setLoading(true)
-  client.query({ 
-      query: queryLocations,
-      variables: {
-          text: {
-             name: textSearch
-          }
-      }
-   })
-  .then(( { data, loading } ) => {
-      console.log('RES', data, loading, textSearch)
-      setLoading(loading)
-      setResults(data.locations.results)
-      setPageState({
-        prev   : data.info.prev,
-        next   : data.info.next
-      })
-  })
-  .catch(err => {
-          console.log(err);
-          if(err.message.toString().split(':')[1] === " 404"){
-            setResults([]);
-            setLoading(false);
-            setError(false);
-            console.log('rer', err.message.toString().split(':'))
-            return;
-         }  
-          setError(true)
-          setResults([]);
-          return;
-  })
-}
-
-
- useEffect(()=> {
-    console.log('PAGES', pageState)
- }, [pageState])
-
- const getResults = (textSearch: string, filter: string, page: number) => {
-    if(!textSearch.length || textSearch.length > 3) {
-      switch (filter) {
-          case 'characters':
-              getCharacters(filter, textSearch, page);
-          break;
-          case 'episodes':
-              getEpisodes(filter, textSearch);
-          break;
-          case 'locations':
-              getLocations(filter, textSearch);
-          break;
-      }
-    }
-
- }
-*/
 
 const getResults = (textSearch: string, filter: string, page: number) => {
   if(!textSearch.length || textSearch.length > 3) {
@@ -236,8 +144,9 @@ const getResults = (textSearch: string, filter: string, page: number) => {
  // eslint-disable-next-line react-hooks/exhaustive-deps
  }, [ textSearch, filter ])
 
-    if(error) return (<h2>Ups, ocurrio un error</h2>)
+    if(error) return (<h2 className='text-center n-trans text-red mt-3'>Ups, ocurrio un error...  vuelve a intentarlo</h2>)
     if(loading) return (<Spinner />)
+    if(!results.length) return (<h2 className='text-center n-trans mt-5 pt-2'>Nada por aquí... intenta con otra cosa</h2>)
     return (
         <>
           <div className="row mt-5 display-flex min-heigth-90">

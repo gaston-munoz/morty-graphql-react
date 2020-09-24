@@ -24,13 +24,13 @@ const Sidebar = ({setFilter, setPageState }:PropsT  ): JSX.Element => {
                     <div className="card-body bg-dark text-white card-responsive">
                       <div className="custom-control custom-radio c-pointer">
                         <input type="radio" 
-                          className="custom-control-input" 
+                          className="custom-control-input c-pointer" 
                           id="characters" 
                           name="filter" 
                           value="characters"
                           defaultChecked
                           onChange={ _handleChange } />
-                        <label className="custom-control-label" htmlFor="characters">Characters</label>
+                        <label className="custom-control-label c-pointer" htmlFor="characters">Characters</label>
                       </div>
                       <div className="custom-control custom-radio form-froup c-pointer">
                         <input type="radio" 
