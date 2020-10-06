@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useRef } from 'react';
 
 interface PropsT {
   setFilter: Function,
@@ -6,14 +6,32 @@ interface PropsT {
 }
 
 const Sidebar = ({setFilter, setPageState }:PropsT  ): JSX.Element => {
+    const charRef = useRef(null)
 
-    const _handleChange = (e: ChangeEvent<HTMLInputElement>):void=> {
+    const toggleColor = (type: string) => {
+       let labels: NodeListOf<any> = document.querySelectorAll('.label-type');
+
+       labels.forEach(l => {
+          if(l.htmlFor === type) {
+            l.classList.add('text-danger');
+          }
+          else {
+            l.classList.remove('text-danger');
+          }
+       })
+    }
+
+    const _handleChange = (e: ChangeEvent<HTMLInputElement>, type: string):void=> {
         setFilter(e.target.value);
         setPageState({
           prev: 0,
           next: 1
         });
+
+        toggleColor(type);
     }
+
+
 
     return (
               <div className="container-fluid bg-primary pt-5">
@@ -29,8 +47,8 @@ const Sidebar = ({setFilter, setPageState }:PropsT  ): JSX.Element => {
                           name="filter" 
                           value="characters"
                           defaultChecked
-                          onChange={ _handleChange } />
-                        <label className="custom-control-label c-pointer" htmlFor="characters">Characters</label>
+                          onChange={ (e) => {_handleChange(e, "characters") } } />
+                        <label className="c-pointer label-type text-danger" htmlFor="characters" ref={charRef}>Characters</label>
                       </div>
                       <div className="custom-control custom-radio form-froup c-pointer">
                         <input type="radio" 
@@ -38,8 +56,8 @@ const Sidebar = ({setFilter, setPageState }:PropsT  ): JSX.Element => {
                         id="episodes" 
                         name="filter" 
                         value="episodes" 
-                        onChange={ _handleChange }/>
-                        <label className="custom-control-label c-pointer" htmlFor="episodes">Episodes</label>
+                        onChange={ (e) => {_handleChange(e, "episodes") }}/>
+                        <label className="c-pointer label-type" htmlFor="episodes">Episodes</label>
                       </div>
                       <div className="custom-control custom-radio ">
                         <input type="radio" 
@@ -47,8 +65,8 @@ const Sidebar = ({setFilter, setPageState }:PropsT  ): JSX.Element => {
                         id="locations" 
                         name="filter" 
                         value="locations" 
-                        onChange={ _handleChange }/>
-                        <label className="custom-control-label c-pointer" htmlFor="locations">Locations</label>
+                        onChange={ (e) => {_handleChange(e, "locations") }}/>
+                        <label className="c-pointer label-type" htmlFor="locations">Locations</label>
                       </div>
                   </div>
                 </div>

@@ -4,7 +4,7 @@ import Spinner from '../Spinner';
 import Pagination from '../Pagination'
 
 // import { results } from '../../db/index'
-import ApolloClient, { gql } from 'apollo-boost';
+import ApolloClient, { DocumentNode, gql } from 'apollo-boost';
 
 const client = new ApolloClient({
   uri: 'https://rickandmortyapi.com/graphql'
@@ -18,7 +18,7 @@ interface Data {
 
 }
 
-const queryCharacters = gql`
+const queryCharacters: DocumentNode = gql`
   query ($text: FilterCharacter, $page: Int) {
       characters(filter: $text, page: $page) {
           info {
@@ -33,7 +33,7 @@ const queryCharacters = gql`
     }
 }`
 
-const queryEpisodes = gql`
+const queryEpisodes: DocumentNode = gql`
   query ($text: FilterEpisode, $page: Int) {
     episodes(filter: $text, page: $page) {
       info {
@@ -49,7 +49,7 @@ const queryEpisodes = gql`
 }
 `
 
-const queryLocations = gql`
+const queryLocations: DocumentNode = gql`
   query ($text: FilterLocation, $page: Int) {
     locations(filter: $text, page: $page) {
       info {
@@ -132,7 +132,7 @@ const fetchData = (filter: string, textSearch: string, page: number ) => {
   })
 }
 
-const getResults = (textSearch: string, filter: string, page: number) => {
+const getResults = (textSearch: string, filter: string, page: number): void => {
   if(!textSearch.length || textSearch.length > 3) {
     fetchData( filter, textSearch, page);
   }
