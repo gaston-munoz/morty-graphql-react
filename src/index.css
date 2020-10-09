@@ -161,7 +161,7 @@ li.page-item.disabled span {
 }
 
 .min-heigth-90 {
-  min-height: 70vh;
+  min-height: 90vh;
 }
 
 .text-normal {
@@ -188,3 +188,16 @@ li.page-item.disabled span {
 
 }
 
+
+.custom-modal {
+  min-height: 100vh !important;
+}
+
+.modal-content {
+  min-height: 800px !important;
+
+}
+
+h3.name {
+  text-transform: none !important;
+}

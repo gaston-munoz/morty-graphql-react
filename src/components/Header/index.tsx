@@ -6,7 +6,7 @@ const Header = (): JSX.Element => {
           <div className="container text-center">
             <ul className="navbar-nav mx-auto">
                 <li className="nav-item active">
-                <a className="nav-link" href="/">Busca tus Personajes peferidos de Rick and Morty <span className="sr-only">(current)</span></a>
+                <a className="nav-link" href="/">FIND YOUR FAVORITE RICK AND MORTY CHARACTERS<span className="sr-only">(current)</span></a>
                 </li>
             </ul>
           </div>

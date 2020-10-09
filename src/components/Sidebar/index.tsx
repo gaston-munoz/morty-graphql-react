@@ -1,11 +1,13 @@
-import React, { ChangeEvent, useRef } from 'react';
+import React, { ChangeEvent, useRef, useContext, useEffect } from 'react';
+import { MainContext } from '../../context/MainContext';
 
 interface PropsT {
   setFilter: Function,
   setPageState: Function
 }
 
-const Sidebar = ({setFilter, setPageState }:PropsT  ): JSX.Element => {
+const Sidebar = (): JSX.Element => {
+    const { setCategory, category } = useContext(MainContext);
     const charRef = useRef(null)
 
     const toggleColor = (type: string) => {
@@ -22,16 +24,9 @@ const Sidebar = ({setFilter, setPageState }:PropsT  ): JSX.Element => {
     }
 
     const _handleChange = (e: ChangeEvent<HTMLInputElement>, type: string):void=> {
-        setFilter(e.target.value);
-        setPageState({
-          prev: 0,
-          next: 1
-        });
-
+      setCategory(e.target.value);
         toggleColor(type);
     }
-
-
 
     return (
               <div className="container-fluid bg-primary pt-5">

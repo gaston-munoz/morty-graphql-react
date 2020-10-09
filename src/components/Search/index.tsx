@@ -1,4 +1,5 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useContext } from 'react';
+import { MainContext } from '../../context/MainContext';
 
 interface PropT {
   setTextSearch: Function,
@@ -6,14 +7,11 @@ interface PropT {
   setPageState: Function
 }
 
-const Search = ({ setTextSearch, textSearch, setPageState }: PropT) => {
+const Search = (): JSX.Element => {
+  const { textSearch, setTextSearch } = useContext(MainContext);
+
     const _handleChange = (text: string) => {
       setTextSearch(text);
-      setPageState({
-        prev: 0,
-        next: 1
-      });
-
     }
 
     return (

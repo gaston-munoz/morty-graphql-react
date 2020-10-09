@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import CharacterModal from '../Modal/CharacterModal';
-import LocationModal from '../Modal/LocationModal';
-import EpisodeModal from '../Modal/EpisodeModal';
-
+import React, { useContext, useState } from 'react';
+import { ModalContext } from '../../context/ModalContext';
+import Modal from '../Modal';
+import { MainContext } from '../../context/MainContext';
+  
 interface PropData {
-    data?: Data,
-    type: string
+    data: Data,
+    type?: string
 }
 
 interface Data {
@@ -24,22 +24,30 @@ interface CharacterData {
 interface Character {
   name: string,
   image: string,
-  type: string,
+  type?: string,
   species: string,
   gender: string
 }
 
-const Card = ( {data, type}: PropData) => {
-    const [ show, setShow ] = useState(false);
+const Card = ( { data }: PropData) => {
+  const [ show, setShow ] = useState(false);
+  const { setEntityId, setData } = useContext(ModalContext);
+  const { category: type, } = useContext(MainContext);
 
-const _handleClose = () => {
-  setShow(false);
-}
+  const _handleShow = (id: number) => {
+    setEntityId(id);
+    setShow(true)
+  }
 
+  const _handleClose = () => {
+    setData(null);
+    setShow(false);
+  }
+  
 return(
   <>
-    <div className="card c-pointer mb-2"
-      onClick={()=>{setShow(true)}} >
+    <div className="card c-pointer m-2"
+      onClick={()=>{_handleShow(data.id)}} >
         <div className="card-header text-center">
             <h4>
                 { data ? data.name : '' }
@@ -66,10 +74,8 @@ return(
         }
         </div>
     </div>
-      { type === 'characters' ? <CharacterModal show={show} type={type} char={data && data.id ? data.id : 1} _handleClose={_handleClose} /> :
-        type === 'locations' ?  <LocationModal show={show} locationId={data && data.id ? data.id : 1} _handleClose={_handleClose} /> :
-        <EpisodeModal show={show} episodeId={data && data.id ? data.id : 1} _handleClose={_handleClose} />
-      } 
+    <Modal show={show} _handleClose={_handleClose} />    
+
   </>
     )
 }
