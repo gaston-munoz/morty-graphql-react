@@ -3,9 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import Card from '../Card'
 import Spinner from '../Spinner';
 import Pagination from '../Pagination'
-
 import { MainContext } from '../../context/MainContext';
-
 
 interface Data {
     id: number,
@@ -21,6 +19,14 @@ const List = (): JSX.Element => {
   const { loading, error, data } = useContext(MainContext);
   const [ results, setResults ] = useState([])
 
+  function handleErrors() {
+      if(error.message !== '404: Not Found')
+        return <h2 className='text-center n-trans text-red mt-3'>Oops, an error occurred ... Please try again</h2>
+      else {
+        return (<h2 className='text-center n-trans mt-5 pt-2'>Nothing around here... try something else</h2>)
+      }  
+  }
+
   useEffect(() => {
     if(data) {
       const entries: IEntries = Object.entries(data);
@@ -29,9 +35,8 @@ const List = (): JSX.Element => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ data ])
 
-    if(error && error.message !== '404: Not Found') return (<h2 className='text-center n-trans text-red mt-3'>Oops, an error occurred ... Please try again</h2>)
     if(loading) return (<Spinner />)
-    if((error && error.message === '404: Not Found') || (!results.length)) return (<h2 className='text-center n-trans mt-5 pt-2'>Nothing around here... try something else</h2>)
+    if(error) return handleErrors();
     return (
         <>
           <div className="row mt-5 display-flex min-heigth-90">
