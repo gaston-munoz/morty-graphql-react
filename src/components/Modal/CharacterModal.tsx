@@ -5,17 +5,24 @@ import Image from 'react-bootstrap/Image'
 import Spinner from '../Spinner';
 import { ModalProps } from '.';
 
+interface ICharacter {
+    name   : string;
+    type   : string;
+    species: string;
+    image  : string;
+    gender : string;
+}
 
 const CharacterModal: React.FC<ModalProps> = ({ show, handleClose }) => {
     const { data, loading, error } = useContext(ModalContext);
-
-    const [ character, setCharacter ] = useState({
+    const char: ICharacter = {
         name   : '',
         type   : '',
         species: '',
         image  : '',
         gender : ''
-    })
+    }
+    const [ character, setCharacter ] = useState(char)
 
     useEffect(() => {
         if(data) 

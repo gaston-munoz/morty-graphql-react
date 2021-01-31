@@ -16,8 +16,9 @@ interface Data {
 type IEntries = any[][];
 
 const List = (): JSX.Element => {
+  const array: Data[] = []
   const { loading, error, data } = useContext(MainContext);
-  const [ results, setResults ] = useState([])
+  const [ results, setResults ] = useState(array)
 
   function handleErrors() {
       if(error.message !== '404: Not Found')
