@@ -23,7 +23,7 @@ const Sidebar = (): JSX.Element => {
        })
     }
 
-    const _handleChange = (e: ChangeEvent<HTMLInputElement>, type: string):void=> {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>, type: string):void=> {
       setCategory(e.target.value);
         toggleColor(type);
     }
@@ -42,7 +42,7 @@ const Sidebar = (): JSX.Element => {
                           name="filter" 
                           value="characters"
                           defaultChecked
-                          onChange={ (e) => {_handleChange(e, "characters") } } />
+                          onChange={ (e) => {handleChange(e, "characters") } } />
                         <label className="c-pointer label-type text-danger" htmlFor="characters" ref={charRef}>Characters</label>
                       </div>
                       <div className="custom-control custom-radio form-froup c-pointer">
@@ -51,7 +51,7 @@ const Sidebar = (): JSX.Element => {
                         id="episodes" 
                         name="filter" 
                         value="episodes" 
-                        onChange={ (e) => {_handleChange(e, "episodes") }}/>
+                        onChange={ (e) => {handleChange(e, "episodes") }}/>
                         <label className="c-pointer label-type" htmlFor="episodes">Episodes</label>
                       </div>
                       <div className="custom-control custom-radio ">
@@ -60,7 +60,7 @@ const Sidebar = (): JSX.Element => {
                         id="locations" 
                         name="filter" 
                         value="locations" 
-                        onChange={ (e) => {_handleChange(e, "locations") }}/>
+                        onChange={ (e) => {handleChange(e, "locations") }}/>
                         <label className="c-pointer label-type" htmlFor="locations">Locations</label>
                       </div>
                   </div>

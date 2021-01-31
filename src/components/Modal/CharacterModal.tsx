@@ -6,7 +6,7 @@ import Spinner from '../Spinner';
 import { ModalProps } from '.';
 
 
-const CharacterModal: React.FC<ModalProps> = ({ show, _handleClose }) => {
+const CharacterModal: React.FC<ModalProps> = ({ show, handleClose }) => {
     const { data, loading, error } = useContext(ModalContext);
 
     const [ character, setCharacter ] = useState({
@@ -28,7 +28,7 @@ const CharacterModal: React.FC<ModalProps> = ({ show, _handleClose }) => {
         <Modal
          show={show}
          dialogClassName='custom-modal'
-         onHide={_handleClose}>
+         onHide={handleClose}>
             <Modal.Header className='' closeButton>
             </Modal.Header>
             {
@@ -54,7 +54,7 @@ const CharacterModal: React.FC<ModalProps> = ({ show, _handleClose }) => {
             </>
             }
             <Modal.Footer>
-                <Button  variant="primary" onClick={()=>{_handleClose()}}>
+                <Button  variant="primary" onClick={()=>{handleClose()}}>
                     Close
                 </Button>
             </Modal.Footer>

@@ -10,7 +10,7 @@ interface PropT {
 const Search = (): JSX.Element => {
   const { textSearch, setTextSearch } = useContext(MainContext);
 
-    const _handleChange = (text: string) => {
+    const handleChange = (text: string) => {
       setTextSearch(text);
     }
 
@@ -21,14 +21,14 @@ const Search = (): JSX.Element => {
               placeholder="&#x1f50d; Search" 
               aria-label="Recipient's username" 
               aria-describedby="button-addon2" 
-              onChange={(e: ChangeEvent<HTMLInputElement> ) => { _handleChange(e.target.value)}}
+              onChange={(e: ChangeEvent<HTMLInputElement> ) => { handleChange(e.target.value)}}
               value={textSearch}
               autoFocus/>
             <div className="input-group-append">
               <button className="btn btn-primary rounded-sm" 
                 type="button" 
                 id="button-addon2"
-                onClick={(e: React.MouseEvent<HTMLButtonElement> ) => { _handleChange('')}}>
+                onClick={(e: React.MouseEvent<HTMLButtonElement> ) => { handleChange('')}}>
                   Clean
               </button>
             </div>

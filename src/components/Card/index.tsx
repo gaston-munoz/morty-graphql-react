@@ -34,12 +34,12 @@ const Card = ( { data }: PropData) => {
   const { setEntityId, setData } = useContext(ModalContext);
   const { category: type, } = useContext(MainContext);
 
-  const _handleShow = (id: number) => {
+  const handleShow = (id: number) => {
     setEntityId(id);
     setShow(true)
   }
 
-  const _handleClose = () => {
+  const handleClose = () => {
     setData(null);
     setShow(false);
   }
@@ -76,7 +76,7 @@ const Card = ( { data }: PropData) => {
 return(
   <>
     <div className="card c-pointer m-2"
-      onClick={()=>{_handleShow(data.id)}} >
+      onClick={()=>{handleShow(data.id)}} >
         <div className="card-header text-center">
             <h4>
                 { data.name }
@@ -87,7 +87,7 @@ return(
         { renderBodyCard(type, data) }
         </div>
     </div>
-    <Modal show={show} _handleClose={_handleClose} />    
+    <Modal show={show} handleClose={handleClose} />    
   </>
     )
 }

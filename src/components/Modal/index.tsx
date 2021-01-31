@@ -6,22 +6,22 @@ import LocationModal from './LocationModal';
 
 export interface ModalProps {
     show: boolean;
-    _handleClose: Function;
+    handleClose: Function;
 }
  
-const Modal: React.FC<ModalProps> = ({ show, _handleClose }) => {
+const Modal: React.FC<ModalProps> = ({ show, handleClose }) => {
     const { category } = useContext(MainContext);
 
     return ( 
       <>
         { 
           category === 'characters' ? 
-              <CharacterModal show={show} _handleClose={_handleClose} /> 
+              <CharacterModal show={show} handleClose={handleClose} /> 
             : 
             category === 'locations' ?  
-              <LocationModal show={show} _handleClose={_handleClose} /> 
+              <LocationModal show={show} handleClose={handleClose} /> 
             : 
-              <EpisodeModal show={show} _handleClose={_handleClose} />
+              <EpisodeModal show={show} handleClose={handleClose} />
         } 
       </>
      );

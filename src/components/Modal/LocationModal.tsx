@@ -4,7 +4,7 @@ import { Button, Modal } from 'react-bootstrap';
 import { ModalProps } from '.';
 import Spinner from '../Spinner';
 
-const LocationModal: React.FC<ModalProps> = ({ show, _handleClose }) => {
+const LocationModal: React.FC<ModalProps> = ({ show, handleClose }) => {
     const { data, loading, error } = useContext(ModalContext);
     const [ location, setLocation ] = useState({
         name      : '',
@@ -31,7 +31,7 @@ const LocationModal: React.FC<ModalProps> = ({ show, _handleClose }) => {
     const { name = '', type = '', dimension = '', residents = [] } = location;
 
     return(
-        <Modal show={show} onHide={_handleClose} className='' closeButton>
+        <Modal show={show} onHide={handleClose} className='' closeButton>
             <Modal.Header closeButton>
             </Modal.Header>
             {
@@ -64,7 +64,7 @@ const LocationModal: React.FC<ModalProps> = ({ show, _handleClose }) => {
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button  variant="primary" onClick={()=>{_handleClose()}}>
+                    <Button  variant="primary" onClick={()=>{handleClose()}}>
                         Close
                     </Button>
                 </Modal.Footer>
@@ -75,29 +75,3 @@ const LocationModal: React.FC<ModalProps> = ({ show, _handleClose }) => {
 }
 
 export default LocationModal;
-
-
-/***
- * interface LocationData {
-    location: Location,
-}
-
-interface PropChar {
-    _handleClose: Function,
-    show: boolean,
-    locationId: number
-}
-
-
-export interface Location {
-    name      : string,
-    dimension   : string,
-    type      : string,
-    residents: [Resident]
-}
-
-interface Resident {
-    name: string
-}
-
- */

@@ -4,7 +4,7 @@ import { Button, Modal } from 'react-bootstrap';
 import { ModalProps } from '.';
 import Spinner from '../Spinner';
 
-const EpisodeModal: React.FC<ModalProps> = ({ show, _handleClose }) => {
+const EpisodeModal: React.FC<ModalProps> = ({ show, handleClose }) => {
     const { data, loading, error  } = useContext(ModalContext);
     const [ episode, setEpisode ] = useState({
         name      : '',
@@ -31,7 +31,7 @@ const EpisodeModal: React.FC<ModalProps> = ({ show, _handleClose }) => {
     const { name, episode: episodeText, air_date, characters } = episode;
 
     return(
-        <Modal show={show} onHide={_handleClose} className='' closeButton>
+        <Modal show={show} onHide={handleClose} className='' closeButton>
             <Modal.Header closeButton>
             </Modal.Header>
             {
@@ -65,7 +65,7 @@ const EpisodeModal: React.FC<ModalProps> = ({ show, _handleClose }) => {
               </>
             }
             <Modal.Footer>
-                <Button  variant="primary" onClick={()=>{_handleClose()}}>
+                <Button  variant="primary" onClick={()=>{handleClose()}}>
                     Close
                 </Button>
             </Modal.Footer>
@@ -74,30 +74,3 @@ const EpisodeModal: React.FC<ModalProps> = ({ show, _handleClose }) => {
 }
 
 export default EpisodeModal;
-
-/**
- * 
-interface EpisodeData {
-    episode: Episode,
-}
-
-
-interface Character {
-    name: string
-}
-
-export interface Episode {
-    name      : string,
-    episode   : string,
-    air_date  : string,
-    characters: [Character],
-}
-
-interface PropEpi {
-    _handleClose: Function,
-    show: boolean,
-    episodeId: number
-}
-
- * 
- */
