@@ -15,25 +15,17 @@ interface Data {
 
 }
 
-interface TextProp {
-  filter: string,
-  textSearch: string,
-  pageState: StateP
-  setPageState: Function
-}
-
-interface StateP {
-  prev: number,
-  next: number
-}
+type IEntries = any[][];
 
 const List = (): JSX.Element => {
-  const { category, loading, error, data } = useContext(MainContext);
+  const { loading, error, data } = useContext(MainContext);
   const [ results, setResults ] = useState([])
 
   useEffect(() => {
-    if(data)
-      setResults(category === 'characters' ? data.characters.results : category === 'episodes' ? data.episodes.results : data.locations.results )
+    if(data) {
+      const entries: IEntries = Object.entries(data);
+      setResults(entries[0][1].results )
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ data ])
 
