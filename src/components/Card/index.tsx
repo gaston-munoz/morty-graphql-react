@@ -43,6 +43,35 @@ const Card = ( { data }: PropData) => {
     setData(null);
     setShow(false);
   }
+
+  const renderBodyCard = (type: string, data: Data) => {
+    switch (type) {
+      case "character": 
+        return showImg(data);
+      default:
+        return  showTitle(type, data);
+    }
+  }
+
+  const showImg = (data: Data) => {
+    return (
+      <span>
+        <img className="img-responseve img-card" src={ data.image } alt={ data.name } />
+      </span>
+    )
+  }
+
+  const showTitle = (type: string, data: Data) => {
+    return (
+      <h4 className='mt-2'>
+        { 
+          type === 'episodes' ? `Episode: ${ data.episode }` 
+          :
+          `Dimension: ${ data.dimension }` 
+        }
+      </h4>
+    )
+  }
   
 return(
   <>
@@ -50,34 +79,40 @@ return(
       onClick={()=>{_handleShow(data.id)}} >
         <div className="card-header text-center">
             <h4>
-                { data ? data.name : '' }
+                { data.name }
             </h4>
         </div>
         <div className="card-body"
         data-toggle="modal" data-target="#myModal">
-
-        { 
-          type === 'characters' ?    
-            <span>
-                <img className="img-responseve img-card" src={ data ? data.image : '' } alt={data ? data.image : ''} />
-            </span>
-          :  type === 'episodes' ?
-            <h4 className='mt-2'>
-                Episode: { data ? data.episode : ''}
-            </h4>
-          :
-          <>
-            <h4  className='mt-2'>
-                Dimension: { data ? data.dimension : '' }
-            </h4>
-          </>
-        }
+        { renderBodyCard(type, data) }
         </div>
     </div>
     <Modal show={show} _handleClose={_handleClose} />    
-
   </>
     )
 }
 
 export default Card;
+/**
+ * 
+ * 
+ * 
+
+
+
+
+      type === 'characters' ?    
+        <span>
+            <img className="img-responseve img-card" src={ data.image } alt={ data.name } />
+        </span>
+        :  type === 'episodes' ?
+        <h4 className='mt-2'>
+            Episode: { data.episode }
+        </h4>
+        :
+        <>
+        <h4  className='mt-2'>
+            Dimension: { data.dimension }
+        </h4>
+        </>
+ */
