@@ -1,8 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
-const Footer = (): JSX.Element => {
-    return(
+const Footer = (): JSX.Element =>(
         <footer className='bg-dark m-0'>
             <div className="footer m-0 p-3">
                 <div className='m-0 text-center text-white d-flex justify-content-between align-items-center text-white'>
@@ -15,7 +14,6 @@ const Footer = (): JSX.Element => {
                 </div>
             </div>
         </footer>
-    )
-}
+)
 
 export default Footer;
