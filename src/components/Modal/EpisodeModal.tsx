@@ -4,7 +4,7 @@ import { Button, Modal } from 'react-bootstrap';
 import { ModalProps } from '.';
 import Spinner from '../Spinner';
 
-const EpisodeModal: React.SFC<ModalProps> = ({ show, _handleClose }) => {
+const EpisodeModal: React.FC<ModalProps> = ({ show, _handleClose }) => {
     const { data, loading, error  } = useContext(ModalContext);
     const [ episode, setEpisode ] = useState({
         name      : '',
@@ -25,6 +25,7 @@ const EpisodeModal: React.SFC<ModalProps> = ({ show, _handleClose }) => {
         setEpisode({ ...ep, characters: chars });
 
       }  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ data ])
 
     const { name, episode: episodeText, air_date, characters } = episode;

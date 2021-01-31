@@ -55,7 +55,7 @@ const queryLocations: DocumentNode = gql`
 
 export const MainContext: any = createContext(null);
  
-const ProviderMainContext: React.SFC<ProviderMainContextProps> = ({ children }) => {
+const ProviderMainContext: React.FC<ProviderMainContextProps> = ({ children }) => {
     const [ textSearch, setTextSearch ] = useState('');
     const [ category, setCategory ] = useState('characters');
 
@@ -72,6 +72,7 @@ const ProviderMainContext: React.SFC<ProviderMainContextProps> = ({ children }) 
             }
         })
         
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ textSearch, category ])
 
     return ( 

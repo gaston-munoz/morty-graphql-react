@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { MainContext } from '../../context/MainContext';
 
 const Pagination = () => {
-  const { category, textSearch, loading, error, data, getData } = useContext(MainContext);
+  const { category, textSearch, data, getData } = useContext(MainContext);
   const nextPage = category === 'characters' ? data?.characters.info.next : category === 'episodes' ? data?.episodes.info.next :
     data?.locations.info.next;
   

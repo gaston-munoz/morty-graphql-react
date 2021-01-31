@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useRef, useContext, useEffect } from 'react';
+import React, { ChangeEvent, useRef, useContext } from 'react';
 import { MainContext } from '../../context/MainContext';
 
 interface PropsT {
@@ -7,7 +7,7 @@ interface PropsT {
 }
 
 const Sidebar = (): JSX.Element => {
-    const { setCategory, category } = useContext(MainContext);
+    const { setCategory } = useContext(MainContext);
     const charRef = useRef(null)
 
     const toggleColor = (type: string) => {

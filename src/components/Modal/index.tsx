@@ -9,7 +9,7 @@ export interface ModalProps {
     _handleClose: Function;
 }
  
-const Modal: React.SFC<ModalProps> = ({ show, _handleClose }) => {
+const Modal: React.FC<ModalProps> = ({ show, _handleClose }) => {
     const { category } = useContext(MainContext);
 
     return ( 

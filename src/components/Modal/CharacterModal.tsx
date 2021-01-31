@@ -6,7 +6,7 @@ import Spinner from '../Spinner';
 import { ModalProps } from '.';
 
 
-const CharacterModal: React.SFC<ModalProps> = ({ show, _handleClose }) => {
+const CharacterModal: React.FC<ModalProps> = ({ show, _handleClose }) => {
     const { data, loading, error } = useContext(ModalContext);
 
     const [ character, setCharacter ] = useState({
@@ -63,36 +63,3 @@ const CharacterModal: React.SFC<ModalProps> = ({ show, _handleClose }) => {
 }
 
 export default CharacterModal;
-
-/**
- * 
-interface PropChar {
-    _handleClose: Function,
-    show: boolean,
-    char: number,
-    type: string
-}
-
-interface CharacterData {
-    character: Character,
-}
-
-
-interface Character {
-  name: string,
-  image: string,
-  type: string,
-  species: string,
-  gender: string
-}
-
-
-interface Character {
-    name: string,
-    image: string,
-    type: string,
-    species: string,
-    gender: string
-}
- * 
- */

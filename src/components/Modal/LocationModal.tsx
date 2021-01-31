@@ -4,7 +4,7 @@ import { Button, Modal } from 'react-bootstrap';
 import { ModalProps } from '.';
 import Spinner from '../Spinner';
 
-const LocationModal: React.SFC<ModalProps> = ({ show, _handleClose }) => {
+const LocationModal: React.FC<ModalProps> = ({ show, _handleClose }) => {
     const { data, loading, error } = useContext(ModalContext);
     const [ location, setLocation ] = useState({
         name      : '',
@@ -25,6 +25,7 @@ const LocationModal: React.SFC<ModalProps> = ({ show, _handleClose }) => {
             const { location: loc } = data
             setLocation({ ...loc, residents: resis });
         } 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ data ])
 
     const { name = '', type = '', dimension = '', residents = [] } = location;
