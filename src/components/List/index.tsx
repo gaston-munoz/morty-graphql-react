@@ -10,7 +10,6 @@ interface Data {
     name: string,
     image?: string,
     type?: string
-
 }
 
 type IEntries = any[][];
@@ -39,18 +38,18 @@ const List = (): JSX.Element => {
     if(loading) return (<Spinner />)
     if(error) return handleErrors();
     return (
-        <>
-          <div className="row mt-5 display-flex min-heigth-90">
-          {
-            results.map((data: Data, i: number) => (
-              <div className="col-sm-3" key={i}>
-                 <Card data={data} />
-              </div>
-            ))
-          }
-          </div>
-          <Pagination />
-        </>
+      <>
+        <div className="row mt-5 display-flex min-heigth-90">
+        {
+          results.map((data: Data, i: number) => (
+            <div className="col-sm-3" key={i}>
+                <Card data={data} />
+            </div>
+          ))
+        }
+        </div>
+        <Pagination />
+      </>
     )
 }
 

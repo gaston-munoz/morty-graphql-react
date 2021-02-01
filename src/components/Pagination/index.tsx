@@ -2,12 +2,16 @@ import React, { useContext } from 'react';
 import { MainContext } from '../../context/MainContext';
 
 const Pagination = () => {
-  const { category, textSearch, data, getData } = useContext(MainContext);
-  const nextPage = category === 'characters' ? data?.characters.info.next : category === 'episodes' ? data?.episodes.info.next :
-    data?.locations.info.next;
-  
-  const prevPage = category === 'characters' ? data?.characters.info.prev : category === 'episodes' ? data?.episodes.info.prev :
-    data?.locations.info.prev;  
+  const { textSearch, data, getData } = useContext(MainContext);
+  let dataEntries: any;
+  let nextPage: number | undefined = undefined;
+  let prevPage: number | undefined = undefined;
+
+  if(data) {
+    dataEntries = Object.entries(data);
+    nextPage = dataEntries[0][1].info.next;
+    prevPage = dataEntries[0][1].info.prev;
+  }
 
   const fetchNewPage = (textSearch: string, page: number) => {
     getData({
@@ -19,10 +23,7 @@ const Pagination = () => {
       }
     });
 
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    })
+    window.scrollTo(0, 0);
   }
 
     return(

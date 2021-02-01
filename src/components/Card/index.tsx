@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { ModalContext } from '../../context/ModalContext';
-import Modal from '../Modal';
+import Modal from '../Modal/index';
 import { MainContext } from '../../context/MainContext';
   
 interface PropData {
@@ -15,18 +15,6 @@ interface Data {
     image?: string,
     episode?: string,
     dimension?: string
-}
-
-interface CharacterData {
-    character: Character
-}
-
-interface Character {
-  name: string,
-  image: string,
-  type?: string,
-  species: string,
-  gender: string
 }
 
 const Card = ( { data }: PropData) => {
@@ -93,26 +81,3 @@ return(
 }
 
 export default Card;
-/**
- * 
- * 
- * 
-
-
-
-
-      type === 'characters' ?    
-        <span>
-            <img className="img-responseve img-card" src={ data.image } alt={ data.name } />
-        </span>
-        :  type === 'episodes' ?
-        <h4 className='mt-2'>
-            Episode: { data.episode }
-        </h4>
-        :
-        <>
-        <h4  className='mt-2'>
-            Dimension: { data.dimension }
-        </h4>
-        </>
- */
