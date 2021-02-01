@@ -43,7 +43,7 @@ export interface PoviderModalContextProps {
     
 }
  
-const PoviderModalContext: React.SFC<PoviderModalContextProps> = ({ children }) => {
+const PoviderModalContext: React.FC<PoviderModalContextProps> = ({ children }) => {
     const { category } = useContext(MainContext);    
     const [ entityId, setEntityId ] = useState(0);
 
@@ -62,6 +62,7 @@ const PoviderModalContext: React.SFC<PoviderModalContextProps> = ({ children }) 
                 }
             });
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ entityId ])
 
     return ( 

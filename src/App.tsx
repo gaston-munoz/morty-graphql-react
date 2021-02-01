@@ -12,7 +12,6 @@ import List from './components/List';
 import Footer from './components/Footer';
 
 function App() {
-
   return (
     <ProviderMainContext>
       <PoviderModalContext>
