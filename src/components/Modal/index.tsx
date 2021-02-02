@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import { ModalContext } from '../../context/ModalContext';
 import { MainContext } from '../../context/MainContext';
 import { Button, Modal } from 'react-bootstrap';
-// import { ModalProps } from './index_link';
 import Spinner from '../Spinner';
 import Image from 'react-bootstrap/Image'
 
@@ -17,12 +16,14 @@ interface IEntity {
   episode?   : string;
   air_date?  : string;
   characters?: any[];
-  dimension?  : string;
-  type?       : string;
-  residents?  : any[];
-  species?     : string;
-  image?       : string;
-  gender?      : string;
+  dimension? : string;
+  type?      : string;
+  residents? : any[];
+  species?   : string;
+  image?     : string;
+  gender?    : string;
+  elems?     : any[];
+
 }
 
 const EpisodeModal: React.FC<ModalProps> = ({ show, handleClose }) => {
@@ -67,13 +68,8 @@ const EpisodeModal: React.FC<ModalProps> = ({ show, handleClose }) => {
              } 
           }
         }   
-
-        if(category === 'episodes') {  //// It is not possible to use Object.entries() because the position of the arrays is different
-          setEntity({ ...data.episode, characters: elems });
-        }
-        else {
-          setEntity({ ...data.location, residents: elems });
-        }
+       
+        setEntity({ ...data[`${category === 'episodes' ? 'episode' : 'location'}`], elems });
       }
     }  
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -155,14 +151,9 @@ const EpisodeModal: React.FC<ModalProps> = ({ show, handleClose }) => {
         <h4>{ category === 'episodes'? 'Characters: ' : 'Residents: ' } 
           <ul className='pl-5 list-group list-group-flush'>    
             {
-              category === 'episodes'?
-                entity.characters && entity.characters.map((res: any, i: number) => {
-                  return  <li className='list-group-item text-normal pl-2' key={i}>{res.name}</li>
-                })   
-              :
-              entity.residents && entity.residents.map((res: any, i: number) => {
-                  return  <li className='list-group-item text-normal pl-2' key={i}>{res.name}</li>
-              })
+              entity.elems && entity.elems.map((res: any, i: number) => {
+                return  <li className='list-group-item text-normal pl-2' key={i}>{res.name}</li>
+              })   
             }
           </ul>
         </h4>
